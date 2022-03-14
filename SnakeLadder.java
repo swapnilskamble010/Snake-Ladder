@@ -6,6 +6,7 @@ public class SnakeLadder {
 		
 		System.out.println("--Welcome to Snake and Ladder Game--\n\tLet's play..");
 		int playerPosition = 0; //start position
+		int CountToWin = 0;
 		
 		while (playerPosition < 100 && playerPosition >=0) {
 			
@@ -37,8 +38,10 @@ public class SnakeLadder {
 		
 			}
 			System.out.println("Player is at position : " + playerPosition);
-			
+			CountToWin++;	
 		}
+		
+		System.out.println("Number of times dice rolled to Win the Game: " + CountToWin);
 		
 	}
 
