@@ -5,10 +5,13 @@ public class SnakeLadder {
 	public static void main(String[] args) {
 		
 		System.out.println("--Welcome to Snake and Ladder Game--\n\tLet's play..");
-		int playerPosition = 0; //start position
+		int player1Position = 0; //Player 1 start position
+		int player2Position = 0; //Player 2 start position
 		int CountToWin = 0;
 		
-		while (playerPosition < 100 && playerPosition >=0) {
+		boolean flag = true; //Game Starting with player1
+		
+		while ((player1Position < 100 && player1Position >=0) && (player2Position < 100 && player2Position >=0)) {
 			
 			byte dice = (byte)(Math.random()*6 + 1 );
 			System.out.println("Dice Show: " + dice);
@@ -17,28 +20,70 @@ public class SnakeLadder {
 			switch (playerOptions) {
 			
 			case 0:
-				System.out.println("Player choose to Not to Play");
+				if (flag) {
+					System.out.println("Player1 choose to Not to Play");
+					flag = false;
+				}
+				else {
+					System.out.println("Player2 choose to Not to Play");
+					flag = true;					
+				}
+				
 				break;
 				
 			case 1:
-				System.out.println("Player played & got a Ladder");
-				playerPosition = playerPosition + dice;
-				if (playerPosition > 100) {
-					playerPosition = playerPosition - dice;
+				if (flag) {
+					System.out.println("Player1 played & got a Ladder");
+					player1Position = player1Position + dice;
+					if (player1Position > 100) {
+						player1Position = player1Position - dice;
+					}
+					flag = true;
 				}
+				else {
+					System.out.println("Player2 played & got a Ladder");
+					player2Position = player2Position + dice;
+					if (player2Position > 100) {
+						player2Position = player2Position - dice;
+					}
+					flag = false;
+				}
+				
 				break;
 				
 			default:
-				System.out.println("Player played & got a Snake");
-				playerPosition = playerPosition - dice;
-				if (playerPosition <= 0) {
-					playerPosition = 0;
+				if (flag) {
+					System.out.println("Player1 played & got a Snake");
+					player1Position = player1Position - dice;
+					if (player1Position <= 0) {
+						player1Position = 0;
+					}
+					flag = false;
 				}
+				else {
+					System.out.println("Player2 played & got a Snake");
+					player2Position = player2Position - dice;
+					if (player2Position <= 0) {
+						player2Position = 0;
+					}
+					flag = true;
+				}
+				
 				break;	
 		
 			}
-			System.out.println("Player is at position : " + playerPosition);
-			CountToWin++;	
+			
+			CountToWin++;
+			System.out.println("Player1 is at position : " + player1Position);
+			System.out.println("Player2 is at position : " + player2Position);
+				
+		}
+		
+		if (player1Position == 100) {
+			System.out.println("Congrats!! Player 1 Won");
+		}
+		else {
+			System.out.println("Congrats!! Player 2 Won");
 		}
 		
 		System.out.println("Number of times dice rolled to Win the Game: " + CountToWin);
